@@ -70,13 +70,13 @@ public class RefactoringHistoryAction extends AnAction {
       if (target instanceof PsiElementUsageTarget) {
         PsiElementUsageTarget elementUsageTarget = (PsiElementUsageTarget) target;
         PsiElement psiElement = elementUsageTarget.getElement();
-        UElement uElement = UastContextKt.toUElement(psiElement);
-        if (uElement instanceof UMethod) {
-          showHistoryMethod(project, dataContext, (UMethod) uElement);
-        } else if (uElement instanceof UClass) {
-          showHistoryClass(project, dataContext, (UClass) uElement);
-        } else if (uElement instanceof UField) {
-          showHistoryAttribute(project, dataContext, (UField) uElement);
+        UElement element = UastContextKt.toUElement(psiElement);
+        if (element instanceof UMethod) {
+          showHistoryMethod(project, dataContext, (UMethod) element);
+        } else if (element instanceof UClass) {
+          showHistoryClass(project, dataContext, (UClass) element);
+        } else if (element instanceof UField) {
+          showHistoryAttribute(project, dataContext, (UField) element);
         }
       }
     }
@@ -90,21 +90,21 @@ public class RefactoringHistoryAction extends AnAction {
                      target.getName(), dataContext, HistoryType.ATTRIBUTE, null, null);
   }
 
-  private void showHistoryClass(Project project, DataContext dataContext, UClass uClassClass) {
-    String signature = uClassClass.getQualifiedName();
-    List<String> methods = Arrays.stream(uClassClass.getMethods())
+  private void showHistoryClass(Project project, DataContext dataContext, UClass element) {
+    String signature = element.getQualifiedName();
+    List<String> methods = Arrays.stream(element.getMethods())
         .map(StringUtils::calculateSignature).collect(Collectors.toList());
     HashMap<String, Set<RefactoringInfo>> methodsHistory = new HashMap<>();
     methods.forEach(method -> methodsHistory.put(method, map.getOrDefault(method, new HashSet<>())));
 
-    List<String> fields = Arrays.stream(uClassClass.getFields())
+    List<String> fields = Arrays.stream(element.getFields())
         .map(StringUtils::getFieldSignature).collect(Collectors.toList());
     HashMap<String, Set<RefactoringInfo>> fieldsHistory = new HashMap<>();
     fields.forEach(field -> fieldsHistory.put(field, map.getOrDefault(field, new HashSet<>())));
 
     getToolbarWindow(project)
         .showToolbar(map.getOrDefault(signature, new HashSet<>()),
-                     uClassClass.getName(), dataContext, HistoryType.CLASS, methodsHistory, fieldsHistory);
+                     element.getName(), dataContext, HistoryType.CLASS, methodsHistory, fieldsHistory);
   }
 
   private void showHistoryMethod(Project project, DataContext dataContext, UMethod method) {
@@ -129,13 +129,13 @@ public class RefactoringHistoryAction extends AnAction {
     UsageTarget target = usageTarget != null ? usageTarget[0] : null;
     if (target != null) {
       PsiElement psiElement = ((PsiElementUsageTarget) target).getElement();
-      UElement uElement = UastContextKt.toUElement(psiElement);
-      if (uElement instanceof UMethod) {
-        key = StringUtils.calculateSignature((UMethod) uElement);
-      } else if (uElement instanceof UClass) {
-        key = ((UClass) uElement).getQualifiedName();
-      } else if (uElement instanceof UField) {
-        key = StringUtils.getFieldSignature((UField) uElement);
+      UElement element = UastContextKt.toUElement(psiElement);
+      if (element instanceof UMethod) {
+        key = StringUtils.calculateSignature((UMethod) element);
+      } else if (element instanceof UClass) {
+        key = ((UClass) element).getQualifiedName();
+      } else if (element instanceof UField) {
+        key = StringUtils.getFieldSignature((UField) element);
       }
     }
 
