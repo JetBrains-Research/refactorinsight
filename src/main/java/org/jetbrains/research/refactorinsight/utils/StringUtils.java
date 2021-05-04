@@ -58,10 +58,9 @@ public class StringUtils {
   }
 
   /**
-   * Calculates the signature of a PsiMethod such that it matches the once calculated
-   * for a RefactoringMiner UMLOperation.
+   * Calculates the signature of a method such that it matches the once calculated for {@link UMLOperation}.
    *
-   * @param method to calcukate signature for.
+   * @param method to calculate signature for.
    * @return the signature.
    */
   public static String calculateSignature(PsiMethod method) {
