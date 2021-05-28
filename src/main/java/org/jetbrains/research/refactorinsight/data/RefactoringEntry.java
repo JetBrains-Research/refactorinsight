@@ -195,13 +195,13 @@ public class RefactoringEntry implements Serializable {
   private void combineRelatedExtractSuperClass() {
     //Find all extract Super Class Refactorings
     List<RefactoringInfo> superClassRefs = refactorings.stream()
-        .filter(info -> info != null && info.getType().name().equals(EXTRACT_SUPERCLASS.name()))
+        .filter(info -> info != null && info.getType().equals(EXTRACT_SUPERCLASS))
         .collect(Collectors.toList());
 
     //Find all pull up refactorings
     List<RefactoringInfo> pullUpRefs = refactorings.stream()
-        .filter(info -> info != null && info.getType().name().equals(PULL_UP_ATTRIBUTE.name())
-            || info != null && info.getType().name().equals(PULL_UP_OPERATION.name()))
+        .filter(info -> info != null && info.getType().equals(PULL_UP_ATTRIBUTE)
+            || info != null && info.getType().equals(PULL_UP_OPERATION))
         .collect(Collectors.toList());
 
     superClassRefs.forEach(info -> {
@@ -226,12 +226,12 @@ public class RefactoringEntry implements Serializable {
   private void combineRelatedExtractClass() {
     //find all extract class refactorings
     List<RefactoringInfo> extractClassRefactorings = refactorings
-        .stream().filter(x -> x != null && x.getType().name().equals(EXTRACT_CLASS.name()))
+        .stream().filter(x -> x != null && x.getType().equals(EXTRACT_CLASS))
         .collect(Collectors.toList());
 
     List<RefactoringInfo> moves = refactorings.stream()
-        .filter(info -> info.getType().name().equals(MOVE_OPERATION.name())
-            || info.getType().name().equals(MOVE_ATTRIBUTE.name()))
+        .filter(info -> info.getType().equals(MOVE_OPERATION)
+            || info.getType().equals(MOVE_ATTRIBUTE))
         .collect(Collectors.toList());
 
     extractClassRefactorings.forEach(

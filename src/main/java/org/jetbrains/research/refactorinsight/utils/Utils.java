@@ -202,7 +202,7 @@ public class Utils {
   }
 
   private static Predicate<RefactoringInfo> ofType(RefactoringType type) {
-    return (r) -> r.getType().name().equals(type.name());
+    return (r) -> r.getType().equals(type);
   }
 
   /**
