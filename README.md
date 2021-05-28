@@ -2,13 +2,18 @@
 
 [![JB Research](https://jb.gg/badges/research-flat-square.svg)](https://research.jetbrains.org/)
 [![pipeline status](https://github.com/JetBrains-Research/refactorinsight/workflows/Java%20CI%20with%20Gradle/badge.svg)](https://github.com/JetBrains-Research/refactorinsight/badges/master)
-[![coverage report](https://codecov.io/gh/JetBrains-Research/refactorinsight/branch/master/graph/badge.svg)](https://codecov.io/gh/JetBrains-Research/refactorinsight)
 [![Downloads](https://img.shields.io/jetbrains/plugin/d/14704-refactorinsight.svg?style=flat-square)](https://plugins.jetbrains.com/plugin/14704-refactorinsight)
 
-RefactorInsight is a plugin for IntelliJ IDEA that enables the IDE to visualize refactorings in the commit history of Java and Kotlin projects. RefactorInsight relies on [RefactoringMiner](https://github.com/tsantalis/RefactoringMiner) and [kotlinRMiner](https://github.com/JetBrains-Research/kotlinRMiner) for retrieval of refactorings.
+RefactorInsight is a plugin for IntelliJ IDEA that enhances IDE representation of code changes with refactoring information in Java and Kotlin projects. RefactorInsight relies on [RefactoringMiner](https://github.com/tsantalis/RefactoringMiner) and [kotlinRMiner](https://github.com/JetBrains-Research/kotlinRMiner) for retrieval of refactorings.
 
 ## Getting started
-RefactorInsight is сompatible with IntelliJ IDEA 2020.3 and is available for free in the Marketplace: [RefactorInsight](https://plugins.jetbrains.com/plugin/14704-refactorinsight).
+RefactorInsight is сompatible with IntelliJ IDEA 2021.1 and is available for free in the Marketplace: [RefactorInsight](https://plugins.jetbrains.com/plugin/14704-refactorinsight).
+
+### Smart diff
+To make reviewing bug fixes or new features easier, the plugin auto folds refactorings in code diffs and shows hints with their short descriptions.
+Currently, it works for the following refactoring types: `Move Method`, `Pull Up/Push Down Method`, `Extract Method`, and `Inline Method`.
+
+<img src="assets/img/refactorinsight_hint.png" alt="Example" width="600">
 
 ### Refactorings in commits
 To see the refactorings in a git repository, open the built-in `Git` tab. On the right side, you will see a toggle button ![](assets/img/refactorinsight_toggle.svg).
